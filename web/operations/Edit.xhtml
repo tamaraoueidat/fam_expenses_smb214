@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditOperationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditOperationsLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{operationsController.selected.id}" title="#{bundle.EditOperationsTitle_id}" required="true" requiredMessage="#{bundle.EditOperationsRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsLabel_date}" for="date" />
+                    <h:inputText id="date" value="#{operationsController.selected.date}" title="#{bundle.EditOperationsTitle_date}" required="true" requiredMessage="#{bundle.EditOperationsRequiredMessage_date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditOperationsLabel_amount}" for="amount" />
+                    <h:inputText id="amount" value="#{operationsController.selected.amount}" title="#{bundle.EditOperationsTitle_amount}" required="true" requiredMessage="#{bundle.EditOperationsRequiredMessage_amount}"/>
+                    <h:outputLabel value="#{bundle.EditOperationsLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{operationsController.selected.userId}" title="#{bundle.EditOperationsTitle_userId}" required="true" requiredMessage="#{bundle.EditOperationsRequiredMessage_userId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditOperationsLabel_categoryId}" for="categoryId" />
+                    <h:selectOneMenu id="categoryId" value="#{operationsController.selected.categoryId}" title="#{bundle.EditOperationsTitle_categoryId}" required="true" requiredMessage="#{bundle.EditOperationsRequiredMessage_categoryId}">
+                        <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{operationsController.update}" value="#{bundle.EditOperationsSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditOperationsViewLink}"/>
+                <br />
+                <h:commandLink action="#{operationsController.prepareList}" value="#{bundle.EditOperationsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditOperationsIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

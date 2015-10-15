@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewOperationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewOperationsLabel_id}"/>
+                    <h:outputText value="#{operationsController.selected.id}" title="#{bundle.ViewOperationsTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewOperationsLabel_date}"/>
+                    <h:outputText value="#{operationsController.selected.date}" title="#{bundle.ViewOperationsTitle_date}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewOperationsLabel_amount}"/>
+                    <h:outputText value="#{operationsController.selected.amount}" title="#{bundle.ViewOperationsTitle_amount}"/>
+                    <h:outputText value="#{bundle.ViewOperationsLabel_userId}"/>
+                    <h:outputText value="#{operationsController.selected.userId}" title="#{bundle.ViewOperationsTitle_userId}"/>
+                    <h:outputText value="#{bundle.ViewOperationsLabel_categoryId}"/>
+                    <h:outputText value="#{operationsController.selected.categoryId}" title="#{bundle.ViewOperationsTitle_categoryId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{operationsController.destroyAndView}" value="#{bundle.ViewOperationsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewOperationsEditLink}"/>
+                <br />
+                <h:commandLink action="#{operationsController.prepareCreate}" value="#{bundle.ViewOperationsCreateLink}" />
+                <br />
+                <h:commandLink action="#{operationsController.prepareList}" value="#{bundle.ViewOperationsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewOperationsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOperationsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOperationsLabel_date}" for="date" />
+                    <h:inputText id="date" value="#{operationsController.selected.date}" title="#{bundle.CreateOperationsTitle_date}" required="true" requiredMessage="#{bundle.CreateOperationsRequiredMessage_date}">
+                        <f:convertDateTime pattern="mm/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateOperationsLabel_amount}" for="amount" />
+                    <h:inputText id="amount" value="#{operationsController.selected.amount}" title="#{bundle.CreateOperationsTitle_amount}" required="true" requiredMessage="#{bundle.CreateOperationsRequiredMessage_amount}"/>
+                    <h:outputLabel value="#{bundle.CreateOperationsLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{operationsController.selected.userId}" title="#{bundle.CreateOperationsTitle_userId}" required="true" requiredMessage="#{bundle.CreateOperationsRequiredMessage_userId}">
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}" var = "user" itemValue="#{user}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateOperationsLabel_categoryId}" for="categoryId" />
+                    <h:selectOneMenu id="categoryId" value="#{operationsController.selected.categoryId}" title="#{bundle.CreateOperationsTitle_categoryId}" required="true" requiredMessage="#{bundle.CreateOperationsRequiredMessage_categoryId}">
+                        <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{operationsController.create}" value="#{bundle.CreateOperationsSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{operationsController.prepareList}" value="#{bundle.CreateOperationsShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOperationsIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
